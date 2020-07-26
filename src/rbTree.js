@@ -195,7 +195,7 @@ class RbTree {
     const z = createNode(key, value);
     this.count++;
 
-    if (this.root == null) {
+    if (this.count === 1) {
       this.root = z;
       z.color = nodeColor.BLACK;
       z.parent = null;
