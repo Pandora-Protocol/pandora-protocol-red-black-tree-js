@@ -539,9 +539,9 @@ class RbTree {
     if (isNilNode(node)) {
       return;
     }
-    this.inOrder(node.left, array);
+    this.inOrder(node.left, array, method);
     array.push(node[method]());
-    this.inOrder(node.right, array);
+    this.inOrder(node.right, array, method);
   }
 
   preOrder(node, array, method = 'getValue') {
@@ -549,16 +549,16 @@ class RbTree {
       return;
     }
     array.push(node[method]());
-    this.preOrder(node.left, array);
-    this.preOrder(node.right, array);
+    this.preOrder(node.left, array, method);
+    this.preOrder(node.right, array, method);
   }
 
   postOrder(node, array, method = 'getValue') {
     if (isNilNode(node)) {
       return;
     }
-    this.postOrder(node.left, array);
-    this.postOrder(node.right, array);
+    this.postOrder(node.left, array, method);
+    this.postOrder(node.right, array, method);
     array.push(node[method]());
   }
 
