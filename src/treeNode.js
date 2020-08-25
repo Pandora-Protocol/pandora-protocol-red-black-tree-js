@@ -12,8 +12,9 @@ import { toNumber } from './helper';
  */
 
 class Node {
-  constructor(key, value) {
+  constructor(key, id,  value) {
     this.key = toNumber(key);
+    this.id = id;
     this.value = value;
     this.left = null;
     this.right = null;
@@ -31,16 +32,13 @@ class Node {
   getValue() {
     return {
       key: this.key,
+      id: this.id,
       value: this.value,
     }
   }
 
-  getKeyValueArray() {
-    return [ this.key, this.value ]
-  }
-
   getValueKeyArray() {
-    return [  this.value, this.key, ]
+    return [  this.id, this.value, this.key, ]
   }
 
 }

@@ -38,7 +38,7 @@ class RbTree {
   * return Node a copy of original node
   */
   clone(node) {
-    return new Node(node.key, node.value, node.left, node.right, node.color, node.parent);
+    return new Node(node.key, node.id, node.value, node.left, node.right, node.color, node.parent);
   }
 
 /**
@@ -85,9 +85,10 @@ class RbTree {
     return null;
   }
 
-  update(key, value) {
+  update(key, id, value) {
     const node = this.findNode(key);
     node.value = value;
+    node.id = id;
   }
 
 /**
@@ -170,7 +171,7 @@ class RbTree {
   * Make the color of newly inserted nodes as RED and then perform standard BST insertion
   * If x is root, change color of node as BLACK (Black height +1).
   */
-  insert(key, value) {
+  insert(key,  id, value) {
 
     let y = null;
     let x = this.root;
@@ -192,7 +193,7 @@ class RbTree {
 
     }
 
-    const z = createNode(key, value);
+    const z = createNode(key, id, value);
     this.count++;
 
     if (this.count === 1) {
