@@ -22,12 +22,9 @@ import { toNumber, isNilNode } from './helper';
  */
 class RbTree {
 
-  constructor(limitMax, limitMin) {
+  constructor() {
 
     this.emptyTree();
-
-    this.limitMax = limitMax;
-    this.limitMin = limitMin;
 
   }
 
@@ -175,23 +172,6 @@ class RbTree {
 
     let y = null;
     let x = this.root;
-
-    if (this.limitMax && this.count >= this.limitMax ){
-
-      if (key > this.min(this.root).key)
-        this.removeNode(this.min(this.root));
-      else
-        return null;
-
-    }else
-    if (this.limitMin && this.count >= this.limitMin ){
-
-      if (key < this.max(this.root).key )
-        this.removeNode(this.max(this.root) );
-      else
-        return null;
-
-    }
 
     const z = createNode(key, id, value);
     this.count++;
