@@ -498,46 +498,61 @@ class RbTree {
     }
   }
 
-  toSortedArray(method) {
+  toSortedArray(method  = 'getValue') {
     const sortedArray = [];
     this.inOrder(this.root, sortedArray, method);
     return sortedArray;
   }
 
-  toArrayPreOrder(method) {
+  toSortedArrayInverted(method  = 'getValue') {
+    const sortedArray = [];
+    this.inOrderInverted(this.root, sortedArray, method);
+    return sortedArray;
+  }
+
+  toArrayPreOrder(method  = 'getValue') {
     const preOrderArray = [];
     this.preOrder(this.root, preOrderArray, method);
     return preOrderArray;
   }
 
-  toArrayPostOrder(method) {
+  toArrayPostOrder(method  = 'getValue')  {
     const postOrderArray = [];
     this.postOrder(this.root, postOrderArray, method);
     return postOrderArray;
   }
 
-  inOrder(node, array, method = 'getValue') {
-    if (isNilNode(node)) {
+  inOrder(node, array, method) {
+    if (isNilNode(node))
       return;
-    }
+
     this.inOrder(node.left, array, method);
     array.push(node[method]());
     this.inOrder(node.right, array, method);
   }
 
-  preOrder(node, array, method = 'getValue') {
-    if (isNilNode(node)) {
+  inOrderInverted(node, array, method) {
+    if (isNilNode(node))
       return;
-    }
+
+    this.inOrder(node.left, array, method);
+    this.inOrder(node.right, array, method);
+    array.push(node[method]());
+  }
+
+  preOrder(node, array, method) {
+    if (isNilNode(node))
+      return;
+
     array.push(node[method]());
     this.preOrder(node.left, array, method);
     this.preOrder(node.right, array, method);
   }
 
-  postOrder(node, array, method = 'getValue') {
-    if (isNilNode(node)) {
+  postOrder(node, array, method) {
+    if (isNilNode(node))
       return;
-    }
+
     this.postOrder(node.left, array, method);
     this.postOrder(node.right, array, method);
     array.push(node[method]());
