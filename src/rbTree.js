@@ -35,7 +35,7 @@ class RbTree {
   * return Node a copy of original node
   */
   clone(node) {
-    return new Node(node.key, node.id, node.value, node.left, node.right, node.color, node.parent);
+    return new Node(node.key, node.value, node.id,  node.left, node.right, node.color, node.parent);
   }
 
 /**
@@ -82,7 +82,7 @@ class RbTree {
     return null;
   }
 
-  update(key, id, value) {
+  update(key, value, id) {
     const node = this.findNode(key);
     node.value = value;
     node.id = id;
@@ -168,12 +168,12 @@ class RbTree {
   * Make the color of newly inserted nodes as RED and then perform standard BST insertion
   * If x is root, change color of node as BLACK (Black height +1).
   */
-  insert(key,  id, value) {
+  insert(key, value, id) {
 
     let y = null;
     let x = this.root;
 
-    const z = createNode(key, id, value);
+    const z = createNode(key, value, id);
     this.count++;
 
     if (this.count === 1) {
@@ -498,13 +498,13 @@ class RbTree {
     }
   }
 
-  toSortedArray(method  = 'getValue') {
+  toSortedArray( method  = 'getValue') {
     const sortedArray = [];
     this.inOrder(this.root, sortedArray, method);
     return sortedArray;
   }
 
-  toSortedArrayInverted(method  = 'getValue') {
+  toSortedArrayInverted( method  = 'getValue') {
     const sortedArray = [];
     this.inOrderInverted(this.root, sortedArray, method);
     return sortedArray;
@@ -535,9 +535,9 @@ class RbTree {
     if (isNilNode(node))
       return;
 
-    this.inOrderInverted(node.left, array, method);
     this.inOrderInverted(node.right, array, method);
     array.push(node[method]());
+    this.inOrderInverted(node.left, array, method);
   }
 
   preOrder(node, array, method) {

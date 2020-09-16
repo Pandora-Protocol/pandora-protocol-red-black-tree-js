@@ -12,7 +12,7 @@ import { toNumber } from './helper';
  */
 
 class Node {
-  constructor(key, id,  value) {
+  constructor(key, value, id  ) {
     this.key = toNumber(key);
     this.id = id;
     this.value = value;

@@ -2,8 +2,8 @@
 import Node from './treeNode';
 import nodeColor from './color';
 
-function createNode(key, id, value) {
-  let node = new Node(key, id, value);
+function createNode(key,  value, id) {
+  let node = new Node(key,  value, id);
 
   //left leaf has color black. left, right to be nul
   let leftLeaf = new Node(null, null,null);
