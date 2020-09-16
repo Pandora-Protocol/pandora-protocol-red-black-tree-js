@@ -535,8 +535,8 @@ class RbTree {
     if (isNilNode(node))
       return;
 
-    this.inOrder(node.left, array, method);
-    this.inOrder(node.right, array, method);
+    this.inOrderInverted(node.left, array, method);
+    this.inOrderInverted(node.right, array, method);
     array.push(node[method]());
   }
 
