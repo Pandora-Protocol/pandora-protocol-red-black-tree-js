@@ -498,16 +498,64 @@ class RbTree {
     }
   }
 
+  getSortedAfter(  value,  count = 25, method  = 'getValue') {
+
+    const node = this.findNode(value);
+
+    const sortedArray = [];
+    this._getSortedAfter( node, value, sortedArray,  count, {}, method);
+    return sortedArray;
+  }
+
+  _getSortedAfter(node, value, array, count, map, method){
+
+    if (isNilNode(node) || array.length === count || map[node.key] ) return;
+
+    map[node.key] = true;
+
+    if (!isNilNode(node.left) && node.left.key >= value ) this._getSortedAfter(node.left, value, array, count, map, method);
+
+    if (node.key >= value && array.length < count) array.push(node[method]());
+
+    if (!isNilNode(node.right) && node.right.key >= value ) this._getSortedAfter(node.right, value, array, count, map, method);
+
+    this._getSortedAfter(node.parent, value, array, count, map, method);
+
+  }
+
+  getSortedBefore(  value,  count = 25, method  = 'getValue') {
+
+    const node = this.findNode(value);
+
+    const sortedArray = [];
+    this._getSortedBefore( node, value, sortedArray,  count, {}, method);
+    return sortedArray;
+  }
+
+  _getSortedBefore(node, value, array, count, map, method){
+
+    if (isNilNode(node) || array.length === count || map[node.key] ) return;
+
+    map[node.key] = true;
+
+    if (!isNilNode(node.right) && node.right.key <= value ) this._getSortedBefore(node.right, value, array, count, map, method);
+
+    if (node.key <= value && array.length < count) array.push(node[method]());
+
+    if (!isNilNode(node.left) && node.left.key <= value ) this._getSortedBefore(node.left, value, array, count, map, method);
+
+    this._getSortedBefore(node.parent, value, array, count, map, method);
+
+  }
+
   toSortedArray( method  = 'getValue') {
     const sortedArray = [];
     this.inOrder(this.root, sortedArray, method);
     return sortedArray;
   }
 
-  toSortedArrayInverted( method  = 'getValue') {
-    const sortedArray = [];
-    this.inOrderInverted(this.root, sortedArray, method);
-    return sortedArray;
+  toSortedArrayReverse( method  = 'getValue') {
+    return this.toSortedArray(method).reverse();
   }
 
   toArrayPreOrder(method  = 'getValue') {
@@ -523,26 +571,17 @@ class RbTree {
   }
 
   inOrder(node, array, method) {
-    if (isNilNode(node))
-      return;
+
+    if (isNilNode(node)) return;
 
     this.inOrder(node.left, array, method);
     array.push(node[method]());
     this.inOrder(node.right, array, method);
   }
 
-  inOrderInverted(node, array, method) {
-    if (isNilNode(node))
-      return;
-
-    this.inOrderInverted(node.right, array, method);
-    array.push(node[method]());
-    this.inOrderInverted(node.left, array, method);
-  }
-
   preOrder(node, array, method) {
-    if (isNilNode(node))
-      return;
+
+    if (isNilNode(node)) return;
 
     array.push(node[method]());
     this.preOrder(node.left, array, method);
@@ -550,8 +589,8 @@ class RbTree {
   }
 
   postOrder(node, array, method) {
-    if (isNilNode(node))
-      return;
+
+    if (isNilNode(node)) return;
 
     this.postOrder(node.left, array, method);
     this.postOrder(node.right, array, method);
