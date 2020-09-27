@@ -331,29 +331,40 @@ class RbTree {
   * return the min node of a given tree
   */
   min(node) {
-    if (node == null || node === undefined) {
+    if (node == null || node === undefined)
       return {};
-    }
-    while (!isNilNode(node.left)) {
+
+    while (!isNilNode(node.left))
       node = node.left;
-    }
     return node;
   }
 
   minNode() {
     let node = this.root;
-    while (!isNilNode(node.left)) {
+    while (!isNilNode(node.left))
       node = node.left;
-    }
     return node.getValue();
   }
 
   maxNode() {
     let node = this.root;
-    while (!isNilNode(node.right)) {
+    while (!isNilNode(node.right))
       node = node.right;
-    }
     return node.getValue();
+  }
+
+  getMaxNode(){
+    let node = this.root;
+    while (!isNilNode(node.right))
+      node = node.right;
+    return node;
+  }
+
+  getMinNode(){
+    let node = this.root;
+    while (!isNilNode(node.left))
+      node = node.left;
+    return node;
   }
 
   transplant(u, v) {
@@ -500,7 +511,11 @@ class RbTree {
 
   getSortedAfter(  value,  count = 25, method  = 'getValue') {
 
-    const node = this.findNode(value);
+    let node;
+    if (value === undefined){
+      node = this.getMinNode();
+      value = node.key;
+    } else node = this.findNode(value);
 
     const sortedArray = [];
     this._getSortedAfter( node, value, sortedArray,  count, {}, method);
@@ -525,7 +540,11 @@ class RbTree {
 
   getSortedBefore(  value,  count = 25, method  = 'getValue') {
 
-    const node = this.findNode(value);
+    let node;
+    if (value === undefined){
+      node = this.getMaxNode();
+      value = node.key;
+    } else node = this.findNode(value);
 
     const sortedArray = [];
     this._getSortedBefore( node, value, sortedArray,  count, {}, method);
