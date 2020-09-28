@@ -553,9 +553,9 @@ class RbTree {
 
   _getSortedBefore(node, value, array, count, map, method){
 
-    if (isNilNode(node) || array.length === count || map[node.key] ) return;
+    if (isNilNode(node) || array.length === count || map[node.id] ) return;
 
-    map[node.key] = true;
+    map[node.id] = true;
 
     if (!isNilNode(node.right) && node.right.key <= value ) this._getSortedBefore(node.right, value, array, count, map, method);
 
