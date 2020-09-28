@@ -2,7 +2,11 @@
 import Node from './treeNode';
 import nodeColor from './color';
 
-function createNode(key,  value, id) {
+function createUniqueId(){
+  return Math.random().toString() + '_' + Math.random().toString()
+}
+
+function createNode(key,  value, id = createUniqueId() ) {
   let node = new Node(key,  value, id);
 
   //left leaf has color black. left, right to be nul
